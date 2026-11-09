@@ -13,6 +13,7 @@ from pathlib import Path
 
 from prospekthunter.models import Offer
 from prospekthunter.sources.pdf import read_page_texts
+from prospekthunter.sources.text import clean_line, join_name
 
 RETAILER = "REWE"
 
@@ -72,7 +73,7 @@ def _find_validity(pages: Sequence[str]) -> tuple[date | None, date | None]:
 
 
 def _parse_blocks(page: str) -> list[_Block]:
-    lines = [_clean_line(line) for line in re.split(r"\r?\n", page)]
+    lines = [clean_line(line) for line in re.split(r"\r?\n", page)]
     blocks: list[_Block] = []
     buffer: list[str] = []
     index = 0
@@ -92,11 +93,6 @@ def _parse_blocks(page: str) -> list[_Block]:
                 continue
         buffer.append(line)
     return blocks
-
-
-def _clean_line(line: str) -> str:
-    """Restore the hyphens that PDF text extraction reports as a control character."""
-    return line.replace("\x02", "-").strip()
 
 
 def _build_block(lines: Sequence[str], price: Decimal) -> _Block | None:
@@ -127,20 +123,8 @@ def _build_block(lines: Sequence[str], price: Decimal) -> _Block | None:
         closed = False
         name_parts.append(line)
 
-    name = _join_name(name_parts)
+    name = join_name(name_parts)
     name = re.sub(r"^oder\s+", "", name, flags=re.IGNORECASE)
     if not name:
         return None
-    return _Block(name=name, package=_join_name(package_parts) or None, price=price)
-
-
-def _join_name(parts: Sequence[str]) -> str:
-    """Join lines, repairing words that a line break split with a hyphen."""
-    name = ""
-    for part in parts:
-        if name.endswith("-"):
-            # A capital starts a new word of a compound, lower case continues the same word.
-            name = name + part if part[:1].isupper() else name[:-1] + part
-        else:
-            name = f"{name} {part}".strip()
-    return name.strip(" ,")
+    return _Block(name=name, package=join_name(package_parts) or None, price=price)
