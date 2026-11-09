@@ -27,6 +27,7 @@ categories:
       - kräuterquark
       - hüttenkäse
       - körniger frischkäse
+      - körniger bio-frischkäse
       - cottage cheese
       - griechischer joghurt
       - joghurt griechischer art
@@ -58,10 +59,13 @@ categories:
       - puten*
       - truthahn*
       - rinderhack*
+      - rinder-hack*
+      - hackfleisch
       - rinderfilet*
       - hüftsteak*
       - rumpsteak*
       - schweinefilet*
+      - schweine-filet*
       - tatar
     exclude:
       - "*nugget*"
@@ -69,6 +73,8 @@ categories:
       - "*wurst*"
       - "*salami*"
       - "*aufschnitt*"
+      - "*sandwich*"
+      - fix
       - "*soße"
       - "*sauce"
 
@@ -85,6 +91,8 @@ categories:
       - sardinen
     exclude:
       - lachsschinken
+      - flachs*
+      - "*sandwich*"
 
   - name: Plant protein
     include:
@@ -97,6 +105,7 @@ categories:
       - tempeh
       - seitan
       - sojagranulat
+      - sojabohnen*
     exclude:
       - "*kaffee*"
       - espresso
