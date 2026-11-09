@@ -1,6 +1,6 @@
 [project]
 name = "prospekthunter"
-version = "0.0.1"
+version = "0.1.0"
 description = "Finds the offers you care about in German supermarket flyers."
 readme = "README.md"
 requires-python = ">=3.13"
