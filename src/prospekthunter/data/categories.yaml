@@ -1,0 +1,117 @@
+# Default product groups for a fit, protein-focused diet.
+#
+# Terms are compared with whole words in a product name, ignoring upper and lower case.
+# A hyphen separates words, so "Bio-Eier" contains the words "bio" and "eier".
+#
+#   eier       the exact word only, so "Eierlikör" does not match
+#   hähnchen*  words starting with the term, such as "Hähnchenbrust"
+#   "*quark"   words ending with the term, such as "Magerquark"
+#   "*whey*"   words containing the term anywhere
+#
+# Terms starting with * need quotes, because a bare * has a special meaning in YAML.
+# A product matching any "exclude" term is left out of that group.
+
+categories:
+  - name: Protein products
+    include:
+      - "*protein*"
+      - "*eiweiß*"
+      - "*whey*"
+
+  - name: Dairy
+    include:
+      - "*skyr*"
+      - quark
+      - magerquark
+      - speisequark
+      - kräuterquark
+      - hüttenkäse
+      - körniger frischkäse
+      - cottage cheese
+      - griechischer joghurt
+      - joghurt griechischer art
+      - kefir
+      - harzer*
+    exclude:
+      - "*creme"
+      - "*kuchen"
+      - "*torte"
+
+  - name: Eggs
+    include:
+      - eier
+      - freilandeier
+      - bodenhaltungseier
+      - hühnereier
+      - eiklar
+    exclude:
+      - schoko*
+      - "*teigware*"
+      - nudeln
+      - hering*
+      - "*likör"
+      - überraschung*
+
+  - name: Lean meat
+    include:
+      - hähnchen*
+      - puten*
+      - truthahn*
+      - rinderhack*
+      - rinderfilet*
+      - hüftsteak*
+      - rumpsteak*
+      - schweinefilet*
+      - tatar
+    exclude:
+      - "*nugget*"
+      - cordon
+      - "*wurst*"
+      - "*salami*"
+      - "*aufschnitt*"
+      - "*soße"
+      - "*sauce"
+
+  - name: Fish and seafood
+    include:
+      - thunfisch*
+      - "*lachs*"
+      - "*garnelen"
+      - shrimps
+      - kabeljau*
+      - "*forelle*"
+      - hering*
+      - makrele*
+      - sardinen
+    exclude:
+      - lachsschinken
+
+  - name: Plant protein
+    include:
+      - linsen*
+      - kichererbsen*
+      - bohnen
+      - kidneybohnen
+      - tofu*
+      - edamame*
+      - tempeh
+      - seitan
+      - sojagranulat
+    exclude:
+      - "*kaffee*"
+      - espresso
+      - crema
+
+  - name: Fit staples
+    include:
+      - "*haferflocken"
+      - vollkorn*
+      - reis
+      - basmati*
+      - jasminreis
+      - naturreis
+      - vollkornreis
+    exclude:
+      - "*keks*"
+      - "*cracker*"
+      - "*waffel*"
